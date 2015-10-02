@@ -951,7 +951,6 @@ BOOLEAN CFG80211OS_RxMgmt(IN PNET_DEV pNetDev, IN INT32 freq, IN PUCHAR frame, I
 				0,       //CFG_TODO return 0 in dbm
 				frame,
 				len,
-				0,
 				GFP_ATOMIC); 
 #else
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,37))
@@ -997,7 +996,7 @@ VOID CFG80211OS_NewSta(IN PNET_DEV pNetDev, IN const PUCHAR mac_addr, IN const P
 	NdisZeroMemory(&sinfo, sizeof(sinfo));
 
 /* If get error here, be sure patch the cfg80211_new_sta.patch into kernel. */
-	sinfo.filled = STATION_INFO_ASSOC_REQ_IES;
+	//sinfo.filled = STATION_INFO_ASSOC_REQ_IES;
 
 	mgmt = (struct ieee80211_mgmt *) assoc_frame;	
 	sinfo.assoc_req_ies_len = assoc_len - 24 - 4;
